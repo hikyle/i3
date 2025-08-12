@@ -1,0 +1,120 @@
+set $mod Mod4
+
+font pango:JetBrainsMono Nerd Font 10
+
+set $terminal "kitty"
+set $browser "firefox"
+set $filemanager "thunar"
+set $menu "pkill rofi || rofi -show drun -replace -i"
+
+exec --no-startup-id xrandr --output DP-0 --primary --mode 2560x1440 --rate 143.97 --pos 0x0 --output HDMI-0 --mode 1920x1080 --rate 100.0 --pos 2560x0
+exec --no-startup-id nm-applet
+exec --no-startup-id polybar
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+exec_always --no-startup-id feh --bg-fill ~/Pictures/Wallpaper/wallhaven-lyqxqq.png
+exec_always --no-startup-id dunst
+exec --no-startup-id i3-msg 'focus output DP-0'
+exec --no-startup-id dex --autostart --environment i3
+exec_always --no-startup-id autotiling
+
+for_window [class="^.*"] border pixel 4
+gaps inner 10
+gaps outer 2
+default_floating_border normal
+floating_modifier $mod
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+1 move container to workspace number $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9; workspace $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10; workspace $ws10
+
+workspace 1 output DP-0
+workspace 2 output HDMI-0
+workspace 3 output DP-0
+workspace 4 output HDMI-0
+workspace 5 output DP-0
+workspace 6 output HDMI-0
+workspace 7 output DP-0
+workspace 8 output HDMI-0
+workspace 9 output DP-0
+workspace 10 output HDMI-0
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+Q i3-msg exit
+
+bindsym $mod+T floating toggle
+bindsym $mod+F fullscreen toggle
+
+bindsym $mod+I focus up
+bindsym $mod+J focus left
+bindsym $mod+K focus down
+bindsym $mod+L focus right
+
+bindsym $mod+Shift+I move up
+bindsym $mod+Shift+J move left
+bindsym $mod+Shift+K move down
+bindsym $mod+Shift+L move right
+
+bindsym $mod+Return exec $terminal
+bindsym $mod+Q kill
+bindsym $mod+Shift+Return exec --no-startup-id $menu
+bindsym $mod+B exec --no-startup-id $browser
+bindsym $mod+E exec --no-startup-id $filemanager
+bindsym $mod+Shift+S exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+
+# Catppuccin Macchiato
+set $rose     #f4dbd6
+set $flamingo #f0c6c6
+set $pink     #f5bde6
+set $mauve    #c6a0f6
+set $red      #ed8796
+set $maroon   #ee99a0
+set $peach    #f5a97f
+set $yellow   #eed49f
+set $green    #a6da95
+set $teal     #8bd5ca
+set $sky      #91d7e3
+set $sapphire #7dc4e4
+set $blue     #8aadf4
+set $lavender #b7bdf8
+set $base     #24273a
+set $text     #cad3f5
+set $surface  #5b6078
+
+# class                 border    bground text  indicator child_border
+client.focused          $rose     $base   $text $rose     $rose
+client.focused_inactive $surface  $base   $text $surface  $surface
+client.unfocused        $surface  $base   $text $surface  $surface
+client.urgent           $red      $base   $text $red      $red
+client.placeholder      $rose     $base   $text $rose     $rose
+client.background       $rose                   $rose     $rose
